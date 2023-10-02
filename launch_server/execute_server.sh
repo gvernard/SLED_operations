@@ -31,6 +31,7 @@ then
 fi
 
 
+sled_root=`pwd`/../..
 
 # Export environment variables and set the settings.py file
 export DJANGO_SLACK_API_TOKEN=`cat slack_api_token.txt`
@@ -42,18 +43,18 @@ then
 	export DJANGO_EMAIL_PASSWORD=`cat email_password.txt`
 	export DJANGO_MEDIA_ROOT=/projects/astro/sled/FILES
 	export DJANGO_STATIC_ROOT=/projects/astro/sled/STATIC
-	export DJANGO_DB_FILE=`pwd`/production_rw.cnf
+	export DJANGO_DB_FILE=production_rw.cnf
 	export DJANGO_NO_LAST_LOGIN=false	
-	cp settings_production.py ../SLED_api/mysite/settings.py
+	cp settings_production.py ${sled_root}/SLED_api/mysite/settings.py
     elif [ $database = "production_ro" ]
     then
 	export DJANGO_SECRET_KEY=`cat secret_key.txt`
 	export DJANGO_EMAIL_PASSWORD=`cat email_password.txt`
 	export DJANGO_MEDIA_ROOT=/projects/astro/sled/FILES
 	export DJANGO_STATIC_ROOT=/projects/astro/sled/STATIC
-	export DJANGO_DB_FILE=`pwd`/production_ro_server.cnf
+	export DJANGO_DB_FILE=production_ro_server.cnf
 	export DJANGO_NO_LAST_LOGIN=true
-	cp settings_production.py ../SLED_api/mysite/settings.py
+	cp settings_production.py ${sled_root}/SLED_api/mysite/settings.py
     else
 	echo "Options '"${host}"' and '"${database}"' not allowed!"
 	exit 0
@@ -64,31 +65,31 @@ then
     then
 	export DJANGO_SECRET_KEY='django-insecure-3#$_(o_0g=w68gw@y5anq4$yb2$b!&1_@+bk%jse$*mboql#!t'
 	export DJANGO_EMAIL_PASSWORD='ixzdsavcwdgohgrj'
-	export DJANGO_MEDIA_ROOT=`pwd`/../FILES_TEST
-	export DJANGO_STATIC_ROOT=`pwd`/../SLED_api/staticfiles
-	export DJANGO_DB_FILE=`pwd`/test_localhost.cnf
-	cp settings_debug.py ../SLED_api/mysite/settings.py
+	export DJANGO_MEDIA_ROOT=${sled_root}/FILES_TEST
+	export DJANGO_STATIC_ROOT=${sled_root}/SLED_api/staticfiles
+	export DJANGO_DB_FILE=test_localhost.cnf
+	cp settings_debug.py ${sled_root}/SLED_api/mysite/settings.py
     elif [ $database = "test_production" ]
     then
 	export DJANGO_SECRET_KEY='django-insecure-3#$_(o_0g=w68gw@y5anq4$yb2$b!&1_@+bk%jse$*mboql#!t'
 	export DJANGO_EMAIL_PASSWORD='ixzdsavcwdgohgrj'
-	export DJANGO_MEDIA_ROOT=`pwd`/../FILES_TEST
-	export DJANGO_STATIC_ROOT=`pwd`/../SLED_api/staticfiles
-	export DJANGO_DB_FILE=`pwd`/test_localhost.cnf
+	export DJANGO_MEDIA_ROOT=${sled_root}/FILES_TEST
+	export DJANGO_STATIC_ROOT=${sled_root}/SLED_api/staticfiles
+	export DJANGO_DB_FILE=test_localhost.cnf
 	export DJANGO_NO_LAST_LOGIN=false
-	cp settings_production.py ../SLED_api/mysite/settings.py
+	cp settings_production.py ${sled_root}/SLED_api/mysite/settings.py
     elif [ $database = "production_ro" ]
     then
 	export DJANGO_SECRET_KEY='django-insecure-3#$_(o_0g=w68gw@y5anq4$yb2$b!&1_@+bk%jse$*mboql#!t'
 	export DJANGO_EMAIL_PASSWORD='ixzdsavcwdgohgrj'
-	export DJANGO_MEDIA_ROOT=`pwd`/../FILES_TEST
-	export DJANGO_STATIC_ROOT=`pwd`/../SLED_api/staticfiles
-	export DJANGO_DB_FILE=`pwd`/production_ro_localhost.cnf
+	export DJANGO_MEDIA_ROOT=${sled_root}/FILES_TEST
+	export DJANGO_STATIC_ROOT=${sled_root}/SLED_api/staticfiles
+	export DJANGO_DB_FILE=production_ro_localhost.cnf
 	export DJANGO_NO_LAST_LOGIN=true
-	cp settings_production.py ../SLED_api/mysite/settings.py	
+	cp settings_production.py ${sled_root}/SLED_api/mysite/settings.py	
     elif [ $database = "sqlite" ]
     then
-	cp settings_localhost_sqlite.py ../SLED_api/mysite/settings.py
+	cp settings_localhost_sqlite.py ${sled_root}/SLED_api/mysite/settings.py
     else
 	echo "Options '"${host}"' and '"${database}"' not allowed!"
 	exit 0
@@ -120,7 +121,7 @@ fi
 
 
 # Start the django server
-cd ../SLED_api
+cd ${sled_root}/SLED_api
 if [ $command = "launch" ]
 then
     if [ `hostname -s` = "django01" ]
