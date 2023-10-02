@@ -1,0 +1,4 @@
+launch_server/*.cnf
+launch_server/secret_key.txt
+launch_server/email_password.txt
+launch_server/slack_api_token.txt
