@@ -43,7 +43,7 @@ then
 	export DJANGO_EMAIL_PASSWORD=`cat email_password.txt`
 	export DJANGO_MEDIA_ROOT=/projects/astro/sled/FILES
 	export DJANGO_STATIC_ROOT=/projects/astro/sled/STATIC
-	export DJANGO_DB_FILE=production_rw.cnf
+	export DJANGO_DB_FILE=`pwd`/production_rw.cnf
 	export DJANGO_NO_LAST_LOGIN=false	
 	cp settings_production.py ${sled_root}/SLED_api/mysite/settings.py
     elif [ $database = "production_ro" ]
@@ -52,7 +52,7 @@ then
 	export DJANGO_EMAIL_PASSWORD=`cat email_password.txt`
 	export DJANGO_MEDIA_ROOT=/projects/astro/sled/FILES
 	export DJANGO_STATIC_ROOT=/projects/astro/sled/STATIC
-	export DJANGO_DB_FILE=production_ro_server.cnf
+	export DJANGO_DB_FILE=`pwd`/production_ro_server.cnf
 	export DJANGO_NO_LAST_LOGIN=true
 	cp settings_production.py ${sled_root}/SLED_api/mysite/settings.py
     else
@@ -67,7 +67,7 @@ then
 	export DJANGO_EMAIL_PASSWORD='ixzdsavcwdgohgrj'
 	export DJANGO_MEDIA_ROOT=${sled_root}/FILES_TEST
 	export DJANGO_STATIC_ROOT=${sled_root}/SLED_api/staticfiles
-	export DJANGO_DB_FILE=test_localhost.cnf
+	export DJANGO_DB_FILE=`pwd`/test_localhost.cnf
 	cp settings_debug.py ${sled_root}/SLED_api/mysite/settings.py
     elif [ $database = "test_production" ]
     then
@@ -75,7 +75,7 @@ then
 	export DJANGO_EMAIL_PASSWORD='ixzdsavcwdgohgrj'
 	export DJANGO_MEDIA_ROOT=${sled_root}/FILES_TEST
 	export DJANGO_STATIC_ROOT=${sled_root}/SLED_api/staticfiles
-	export DJANGO_DB_FILE=test_localhost.cnf
+	export DJANGO_DB_FILE=`pwd`/test_localhost.cnf
 	export DJANGO_NO_LAST_LOGIN=false
 	cp settings_production.py ${sled_root}/SLED_api/mysite/settings.py
     elif [ $database = "production_ro" ]
@@ -84,7 +84,7 @@ then
 	export DJANGO_EMAIL_PASSWORD='ixzdsavcwdgohgrj'
 	export DJANGO_MEDIA_ROOT=${sled_root}/FILES_TEST
 	export DJANGO_STATIC_ROOT=${sled_root}/SLED_api/staticfiles
-	export DJANGO_DB_FILE=production_ro_localhost.cnf
+	export DJANGO_DB_FILE=`pwd`/production_ro_localhost.cnf
 	export DJANGO_NO_LAST_LOGIN=true
 	cp settings_production.py ${sled_root}/SLED_api/mysite/settings.py	
     elif [ $database = "sqlite" ]
@@ -97,13 +97,13 @@ then
 fi
 
 
-    
 # Open SSH tunnel if necessary
-if [ `hostname -s` != "django01" ] && ([ $database = "test" ] || [ $database = "test_production" ] || [ $database = "production_ro" ])
+if [ `hostname -s` != "django01" ] && ([ $database = "test" ] || [ $database = "test_production" ] || [ $database = "production" ] || [ $database = "production_ro" ])
 then
-    pkill -f 'ssh -f gvernard@login01.astro.unige.ch -L 8888:mysql10.astro.unige.ch:4006 -N'
+    pkill -f 'ssh -f gvernard@login01.astro.unige.ch -L 8888:mysql10.astro.unige.ch:4008 -N'
+    sleep 3
     echo "Creating SSH tunnel to the mysql server..."
-    ssh -f gvernard@login01.astro.unige.ch -L 8888:mysql10.astro.unige.ch:4006 -N
+    ssh -f gvernard@login01.astro.unige.ch -L 8888:mysql10.astro.unige.ch:4008 -N
     echo "Creating SSH tunnel to the mysql server...DONE"
 fi
 
