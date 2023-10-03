@@ -98,14 +98,23 @@ fi
 
 
 # Open SSH tunnel if necessary
-if [ `hostname -s` != "django01" ] && ([ $database = "test" ] || [ $database = "test_production" ] || [ $database = "production" ] || [ $database = "production_ro" ])
+if [ `hostname -s` != "django01" ]
 then
-    pkill -f 'ssh -f gvernard@login01.astro.unige.ch -L 8888:mysql10.astro.unige.ch:4008 -N'
-    sleep 3
     echo "Creating SSH tunnel to the mysql server..."
-    ssh -f gvernard@login01.astro.unige.ch -L 8888:mysql10.astro.unige.ch:4008 -N
+    if [ $database = "test" ] || [ $database = "test_production" ] || [ $database = "production" ]
+    then
+	pkill -f 'ssh -f gvernard@login01.astro.unige.ch -L 8888:mysql10.astro.unige.ch:4006 -N'
+	ssh -f gvernard@login01.astro.unige.ch -L 8888:mysql10.astro.unige.ch:4006 -N
+    elif [ $database = "production_ro" ]
+    then
+	pkill -f 'ssh -f gvernard@login01.astro.unige.ch -L 8888:mysql10.astro.unige.ch:4008 -N'
+	ssh -f gvernard@login01.astro.unige.ch -L 8888:mysql10.astro.unige.ch:4008 -N
+    fi
     echo "Creating SSH tunnel to the mysql server...DONE"
 fi
+
+
+
 
 
 
