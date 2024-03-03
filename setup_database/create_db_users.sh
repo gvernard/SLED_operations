@@ -16,6 +16,11 @@ fi
 
 # Get database connection parameters
 cnf_file=${secret_path}/root.cnf
+if ! [ -f $cnf_file ]
+then
+    echo "File $cnf_file not found!"    
+    exit
+fi
 MHOST=$($AWK '/^host/{print $3}' $cnf_file)
 MPORT=$($AWK '/^port/{print $3}' $cnf_file)
 MDB=$($AWK '/^database/{print $3}' $cnf_file)
@@ -47,6 +52,7 @@ then
 	echo "MySQL user $USER created successfully."
     else
 	echo "Something went wrong whn creating $USER"
+    fi
 else
     echo "File $cnf_file not found!"    
 fi
@@ -69,6 +75,7 @@ then
 	echo "MySQL user $USER created successfully."
     else
 	echo "Something went wrong whn creating $USER"
+    fi
 else
     echo "File $cnf_file not found!"    
 fi
@@ -91,6 +98,7 @@ then
 	echo "MySQL user $USER created successfully."
     else
 	echo "Something went wrong whn creating $USER"
+    fi
 else
     echo "File $cnf_file not found!"    
 fi
