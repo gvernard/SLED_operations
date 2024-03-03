@@ -87,7 +87,7 @@ if [ -f $cnf_file ]
 then
     USER=$($AWK '/^user/{print $3}' $cnf_file)
     PASS=$($AWK '/^password/{print $3}' $cnf_file)
-    $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "CREATE USER '$USER'@'localhost' IDENTIFIED BY '$PASS'";
+    $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "CREATE USER IF NOT EXISTS '$USER'@'localhost' IDENTIFIED BY '$PASS'";
     status1=$?
     $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "GRANT SELECT ON $MDB.* TO '$USER'@'localhost';"
     status2=$?
