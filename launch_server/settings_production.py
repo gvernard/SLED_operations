@@ -3,7 +3,7 @@ from mysite.settings_common import *
 
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
-DEBUG = True
+DEBUG = False
 
 SESSION_COOKIE_SECURE = True
 
@@ -26,7 +26,7 @@ if os.environ['DJANGO_NO_LAST_LOGIN'] == 'true':
     NO_UPDATE_LAST_LOGIN = True
 else:
     NO_UPDATE_LAST_LOGIN = False
-NO_UPDATE_LAST_LOGIN = True
+
 
 # Specific for the server
 FORCE_SCRIPT_NAME = '/'

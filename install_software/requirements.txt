@@ -1,11 +1,6 @@
 #
 ###### Requirements with Version Specifiers ######
 #   See https://www.python.org/dev/peps/pep-0440/#version-specifiers
-astropy==4.1
-ads==0.12.3
-mysqlclient==2.0.3
-simplejson==3.17.6
-slack-sdk==3.19.5
 django==3.2.24
 django-activity-stream==1.4.0
 django-ajax-selects==1.3.5
@@ -23,3 +18,9 @@ django-notifications-hq==1.6.0
 django-select2==7.7.3
 django-widget-tweaks==1.4.9
 djangorestframework==3.12.4
+astropy==4.1
+ads==0.12.3
+mysqlclient==2.0.3
+simplejson==3.17.6
+slack-sdk==3.19.5
+pillow==8.2.0
