@@ -1,7 +1,7 @@
 #
 ###### Requirements with Version Specifiers ######
 #   See https://www.python.org/dev/peps/pep-0440/#version-specifiers
-astropy==4.2.1
+astropy==4.1
 ads==0.12.3
 mysqlclient==2.0.3
 simplejson==3.17.6
@@ -12,7 +12,7 @@ django-ajax-selects==1.3.5
 django-appconf==1.0.5
 django-bootstrap-modal-forms==2.2.0
 django-crispy-forms==1.13.0
-django-dirtyfields==1.8.1
+django-dirtyfields==1.7.0
 django-gm2m==1.1.1
 django-guardian==2.3.0
 django-jsonfield-backport==1.0.5
