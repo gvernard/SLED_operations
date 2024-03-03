@@ -1,3 +1,5 @@
+DROP FUNCTION IF EXISTS distance_on_sky;
+
 DELIMITER $$
 
 CREATE FUNCTION distance_on_sky(ra DOUBLE,decl DOUBLE,ra0 DOUBLE,decl0 DOUBLE)

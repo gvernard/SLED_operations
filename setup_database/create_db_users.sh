@@ -29,24 +29,24 @@ MPASS=$($AWK '/^password/{print $3}' $cnf_file)
 
 
 # Create database
-$MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "CREATE DATABASE $MDB"
+$MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "CREATE DATABASE IF NOT EXISTS $MDB"
 #$MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS $MDB -e "SET FOREIGN_KEY_CHECKS = 1;"
 $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS $MDB -e "ALTER DATABASE $MDB CHARACTER SET utf8 COLLATE utf8_bin;"
 $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS $MDB < function_distance_on_sky.sql
 
 
 # Create SLED_ROOT user (can create, alter, delete tables)
-$cnf_file=${secret_path}/sled_root.cnf
+cnf_file=${secret_path}/sled_root.cnf
 if [ -f $cnf_file ]
 then
     USER=$($AWK '/^user/{print $3}' $cnf_file)
     PASS=$($AWK '/^password/{print $3}' $cnf_file)
     $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "CREATE USER '$USER'@'localhost' IDENTIFIED WITH mysql_native_password BY '$PASS'";
-    $status1=$?
+    status1=$?
     $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, INDEX, DROP, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON ${MDB}.* TO '$USER'@'localhost';"
-    $status3=$?
+    status3=$?
     $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS $MDB -e "GRANT EXECUTE ON FUNCTION ${MDB}.distance_on_sky TO '$USER'@'localhost';"
-    $status2=$?
+    status2=$?
     if [ $status1 -eq 0 ] && [ $status2 -eq 0 ] && [ $status3 -eq 0 ]
     then
 	echo "MySQL user $USER created successfully."
@@ -59,17 +59,17 @@ fi
 
 
 # Create SLED_RW user (read and write)
-$cnf_file=${secret_path}/sled_rw.cnf
+cnf_file=${secret_path}/sled_rw.cnf
 if [ -f $cnf_file ]
 then
     USER=$($AWK '/^user/{print $3}' $cnf_file)
     PASS=$($AWK '/^password/{print $3}' $cnf_file)
     $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "CREATE USER '$USER'@'localhost' IDENTIFIED WITH mysql_native_password BY '$PASS'";
-    $status1=$?
+    status1=$?
     $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "GRANT SELECT,INSERT,UPDATE,DELETE ON $MDB.* TO '$USER'@'localhost';"
-    $status2=$?
+    status2=$?
     $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS $MDB -e "GRANT EXECUTE ON FUNCTION ${MDB}.distance_on_sky TO '$USER'@'localhost';"
-    $status3=$?
+    status3=$?
     if [ $status1 -eq 0 ] && [ $status2 -eq 0 ] && [ $status3 -eq 0 ]
     then
 	echo "MySQL user $USER created successfully."
@@ -82,17 +82,17 @@ fi
 
 
 # Create SLED_RO user (read only)
-$cnf_file=${secret_path}/SLED_secrets/sled_ro.cnf
+cnf_file=${secret_path}/SLED_secrets/sled_ro.cnf
 if [ -f $cnf_file ]
 then
     USER=$($AWK '/^user/{print $3}' $cnf_file)
     PASS=$($AWK '/^password/{print $3}' $cnf_file)
     $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "CREATE USER '$USER'@'localhost' IDENTIFIED WITH mysql_native_password BY '$PASS'";
-    $status1=$?
+    status1=$?
     $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "GRANT SELECT ON $MDB.* TO '$USER'@'localhost';"
-    $status2=$?
+    status2=$?
     $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS $MDB -e "GRANT EXECUTE ON FUNCTION ${MDB}.distance_on_sky TO '$USER'@'localhost';"
-    $status3=$?
+    status3=$?
     if [ $status1 -eq 0 ] && [ $status2 -eq 0 ] && [ $status3 -eq 0 ]
     then
 	echo "MySQL user $USER created successfully."
