@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $# != 2 ]
+if [ $# != 1 ]
 then
     echo "One command line arguments are required: "
     echo "  1 - the mode of the django server: 'production' or 'debug' or 'production_ro'"
@@ -19,9 +19,6 @@ secret_path=`pwd`/../../SLED_secrets
 export DJANGO_SLACK_API_TOKEN=`cat ${secret_path}/slack_api_token.txt`
 
 
-
-# Start the django server
-cd ${root_path}/SLED_api
 
 if [ $mode = "debug" ]
 then
@@ -48,9 +45,11 @@ else
 	echo "Unknown mode (1st argument)! It must be 'production', 'production_ro', or 'debug'"
 	exit 0
     fi
-	cp settings_production.py ${root_path}/SLED_api/mysite/settings.py
+    cp settings_production.py ${root_path}/SLED_api/mysite/settings.py
 fi
 
+
+cd ${root_path}/SLED_api
 sudo -E python3 manage.py collectstatic --noinput
 sudo -E python3 manage.py runserver 10.194.66.167:8806
 

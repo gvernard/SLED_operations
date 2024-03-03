@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $# != 2 ]
+if [ $# != 1 ]
 then
     echo "One command line arguments are required: "
     echo "  1 - the mode of the django server: 'production' or 'debug' or 'production_ro'"
@@ -21,8 +21,6 @@ export DJANGO_DB_FILE=${secret_path}/sled_root.cnf
 
 
 
-# Start the django server
-cd ${root_path}/SLED_api
 
 if [ $mode = "debug" ]
 then
@@ -40,5 +38,7 @@ else
     cp settings_production.py ${root_path}/SLED_api/mysite/settings.py
 fi
 
+
+cd ${root_path}/SLED_api
 sudo -E python3 manage.py makemigrations
 sudo -E python3 manage.py migrate
