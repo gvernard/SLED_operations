@@ -6,3 +6,11 @@
 #sudo yum install gcc
 #sudo yum install mariadb-devel
 sudo pip3 install -r requirements.txt
+
+
+cd
+mkdir SLED
+cd SLED
+git clone https://github.com/gvernard/SLED_operations 
+git clone https://github.com/gvernard/SLED_api 
+ 
