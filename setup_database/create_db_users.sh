@@ -41,7 +41,7 @@ if [ -f $cnf_file ]
 then
     USER=$($AWK '/^user/{print $3}' $cnf_file)
     PASS=$($AWK '/^password/{print $3}' $cnf_file)
-    $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "CREATE USER '$USER'@'localhost' IDENTIFIED WITH mysql_native_password BY '$PASS'";
+    $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "CREATE USER '$USER'@'localhost' IDENTIFIED BY '$PASS'";
     status1=$?
     $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, INDEX, DROP, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON ${MDB}.* TO '$USER'@'localhost';"
     status3=$?
@@ -64,7 +64,7 @@ if [ -f $cnf_file ]
 then
     USER=$($AWK '/^user/{print $3}' $cnf_file)
     PASS=$($AWK '/^password/{print $3}' $cnf_file)
-    $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "CREATE USER '$USER'@'localhost' IDENTIFIED WITH mysql_native_password BY '$PASS'";
+    $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "CREATE USER '$USER'@'localhost' IDENTIFIED BY '$PASS'";
     status1=$?
     $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "GRANT SELECT,INSERT,UPDATE,DELETE ON $MDB.* TO '$USER'@'localhost';"
     status2=$?
@@ -82,12 +82,12 @@ fi
 
 
 # Create SLED_RO user (read only)
-cnf_file=${secret_path}/SLED_secrets/sled_ro.cnf
+cnf_file=${secret_path}/sled_ro.cnf
 if [ -f $cnf_file ]
 then
     USER=$($AWK '/^user/{print $3}' $cnf_file)
     PASS=$($AWK '/^password/{print $3}' $cnf_file)
-    $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "CREATE USER '$USER'@'localhost' IDENTIFIED WITH mysql_native_password BY '$PASS'";
+    $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "CREATE USER '$USER'@'localhost' IDENTIFIED BY '$PASS'";
     status1=$?
     $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS -e "GRANT SELECT ON $MDB.* TO '$USER'@'localhost';"
     status2=$?
