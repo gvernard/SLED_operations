@@ -7,7 +7,7 @@ DEBUG = True
 
 EMAIL_HOST_PASSWORD = os.environ['DJANGO_EMAIL_PASSWORD']
 
-ALLOWED_HOSTS = ['127.0.0.1','127.0.1.1','localhost','django01.obs.unige.ch','10.194.66.167']
+ALLOWED_HOSTS = ['127.0.0.1','127.0.1.1','localhost','sled.amnh.org','216.73.242.43']
 
 DATABASES = {
     'default': {
