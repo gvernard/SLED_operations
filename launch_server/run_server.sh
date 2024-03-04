@@ -51,6 +51,6 @@ fi
 
 cd ${root_path}/SLED_api
 sudo -E python3 manage.py collectstatic --noinput
-sudo -E python3 manage.py runserver 10.194.66.167:8806
+sudo -E python3 manage.py runserver 216.73.242.43
 
 
