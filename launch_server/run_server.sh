@@ -11,7 +11,7 @@ mode=$1
 root_path=${2%/}
 
 # Sets environment variables and copies the correct setting.py file
-source ${root_path}/SLED_operations/launch_server/set_server.sh $mode $root_path
+source ${root_path}/SLED_operations/launch_server/set_server.sh
 
 # Execute server
 cd ${root_path}/SLED_api
