@@ -14,6 +14,6 @@ root_path=$2
 sudo ${root_path}/SLED_operations/launch/set_server.sh $mode $root_path
 cd ${root_path}/SLED_api
 sudo -E python3 manage.py collectstatic --noinput
-sudo -E python3 manage.py runserver 216.73.242.43
+sudo -E python3 manage.py runserver 216.73.242.43:8000
 
 
