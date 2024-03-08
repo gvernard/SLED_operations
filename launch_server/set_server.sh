@@ -13,6 +13,10 @@ then
     export DJANGO_MEDIA_ROOT=/debug/FILES
     export DJANGO_STATIC_ROOT=/debug/STATIC
     export DJANGO_DB_FILE=${secret_path}/sled_rw.cnf
+    export S3_ACCESS_KEY_ID=`grep -o 'Access.*' ${secret_path}/s3_credentials.txt | cut -f2- -d: | tr -d ' '`
+    export S3_SECRET_ACCESS_KEY=`grep -o 'Secret.*' ${secret_path}/s3_credentials.txt | cut -f2- -d: | tr -d ' '`
+    export S3_STORAGE_BUCKET_NAME=`grep -o 'Bucket.*' ${secret_path}/s3_credentials.txt | cut -f2- -d: | tr -d ' '`
+    export S3_ENDPOINT_URL=`grep -o 'Endpoint.*' ${secret_path}/s3_credentials.txt | cut -f2- -d: | tr -d ' '`
     cp ${current_path}/settings_debug.py ${root_path}/SLED_api/mysite/settings.py
 else
     export DJANGO_SECRET_KEY=`cat ${secret_path}/secret_key.txt`
