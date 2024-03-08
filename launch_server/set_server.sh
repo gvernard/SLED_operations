@@ -12,7 +12,7 @@ then
     export DJANGO_EMAIL_PASSWORD=`cat ${secret_path}/email_password.txt`
     export DJANGO_DB_FILE=${secret_path}/sled_rw.cnf
     export DJANGO_MEDIA_ROOT=/debug/FILES
-    #export DJANGO_STATIC_ROOT=/debug/STATIC
+    export DJANGO_STATIC_ROOT=/debug/STATIC
     export S3_ACCESS_KEY_ID=`grep -o 'Access.*' ${secret_path}/s3_credentials.txt | cut -f2- -d: | tr -d ' '`
     export S3_SECRET_ACCESS_KEY=`grep -o 'Secret.*' ${secret_path}/s3_credentials.txt | cut -f2- -d: | tr -d ' '`
     export S3_STORAGE_BUCKET_NAME=`grep -o 'Bucket.*' ${secret_path}/s3_credentials.txt | cut -f2- -d: | tr -d ' '`
