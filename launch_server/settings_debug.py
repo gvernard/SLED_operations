@@ -19,7 +19,7 @@ DATABASES = {
 }
 
 
-S3=False
+S3=True
 if S3:
     AWS_ACCESS_KEY_ID = os.environ['S3_ACCESS_KEY_ID']
     AWS_SECRET_ACCESS_KEY = os.environ['S3_SECRET_ACCESS_KEY']
@@ -33,7 +33,7 @@ if S3:
     AWS_LOCATION = 'static'
     #STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
     STATIC_URL = f'{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/{AWS_LOCATION}/'
-    STATICFILES_STORAGE = 'storages.backends.s3.S3Storage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 else:
     STATIC_URL = 'static/'
     STATIC_ROOT = os.environ['DJANGO_STATIC_ROOT']
