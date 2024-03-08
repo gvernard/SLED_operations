@@ -33,6 +33,6 @@ STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
 STATICFILES_STORAGE = 'storages.backends.s3.S3Storage'
 
 
+MEDIA_ROOT = os.environ['DJANGO_MEDIA_ROOT']
 #STATIC_URL = 'static/'
-#MEDIA_ROOT = os.environ['DJANGO_MEDIA_ROOT']
 #STATIC_ROOT = os.environ['DJANGO_STATIC_ROOT']
