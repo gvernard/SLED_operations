@@ -13,7 +13,7 @@ root_path=${2%/}
 # Sets environment variables and copies the correct setting.py file
 source ${root_path}/SLED_operations/launch_server/set_server.sh
 
-# Migrate database changes
+# Execute server
 cd ${root_path}/SLED_api
 sudo -E python3 manage.py makemigrations
 sudo -E python3 manage.py migrate
