@@ -10,6 +10,12 @@ fi
 mode=$1
 root_path=${2%/}
 
+if [ $mode != "migrate" ]
+then
+    echo "This script can run only in 'migrate' mode"
+    exit
+fi
+
 # Sets environment variables and copies the correct setting.py file
 source ${root_path}/SLED_operations/launch_server/set_server.sh
 
