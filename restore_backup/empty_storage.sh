@@ -10,7 +10,7 @@ then
 fi
 
 
-conf_file=${secret_path}/rclone.conf
+conf_file=${secret_path}/rclone_storage.conf
 if ! [ -f $conf_file ]
 then
     echo "File $conf_file not found!"    
