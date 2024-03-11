@@ -5,6 +5,7 @@
 #sudo yum install git
 #sudo yum install gcc
 #sudo yum install mariadb-devel
+#sudo yum install rclone
 sudo pip3 install -r requirements.txt
 
 
