@@ -50,9 +50,8 @@ MUSER=$($AWK '/^user/{print $3}' $cnf_file)
 MPASS=$($AWK '/^password/{print $3}' $cnf_file)
 
 # Full database backup using mysqldump
-#$MYSQLDUMP --single-transaction -h $MHOST -P $MPORT -u $MUSER –p$MPASS $MDB > ${BACKUP_DIR}/database/strong_lenses_database.sql
 $MYSQLDUMP --single-transaction -h $MHOST -P $MPORT -u $MUSER -p$MPASS $MDB > ${BACKUP_DIR}/database/strong_lenses_database.sql
-exit
+
 
 
 
@@ -68,7 +67,7 @@ then
 fi
 rclone --config="${conf_file}" sync ${BACKUP_DIR} sled_backup:${NAME}
 rm -r ${BACKUP_DIR}
-rclone copy sled_storage:static sled_backup:${NAME}/files
+rclone --config="${conf_file}" sync sled_storage:static sled_backup:${NAME}/files
 
 
 
