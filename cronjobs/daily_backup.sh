@@ -66,8 +66,13 @@ then
     exit
 fi
 rclone --config="${conf_file}" sync ${BACKUP_DIR} sled_backup:${NAME}
-#rm -r ${BACKUP_DIR}
-#rclone --config="${conf_file}" sync sled_storage:static sled_backup:${NAME}/files
+rm -r ${BACKUP_DIR}
+
+
+
+########## TRANSFER TO REMOTE STORAGE ##########
+
+rclone --config="${conf_file}" sync sled_storage:static sled_backup:${NAME}/files
 
 
 
