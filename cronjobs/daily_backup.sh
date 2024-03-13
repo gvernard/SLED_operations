@@ -50,8 +50,8 @@ MUSER=$($AWK '/^user/{print $3}' $cnf_file)
 MPASS=$($AWK '/^password/{print $3}' $cnf_file)
 
 # Full database backup using mysqldump
-mysqldump -h $MHOST -P $MPORT -u $MUSER –p$MPASS $MDB > ${BACKUP_DIR}/database/strong_lenses_database.sql
-
+mysqldump --single-transaction -h $MHOST -P $MPORT -u $MUSER –p$MPASS $MDB > ${BACKUP_DIR}/database/strong_lenses_database.sql
+exit
 
 
 
