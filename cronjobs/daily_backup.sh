@@ -15,7 +15,8 @@ else
     readonly NAME="latest"
 fi
 readonly BACKUP_DIR="/var/tmp/SLED_tmp_backups/"${NAME}
-if [ -d $BACKUP_DIR ]; then
+if [ -d $BACKUP_DIR ]
+then
     echo "A directory with the name - $NAME - already exists."
     while true; do
 	read -p " Proceeding will overwrite it. Are you sure you want to proceed (y/n)? " yn
@@ -25,7 +26,10 @@ if [ -d $BACKUP_DIR ]; then
             * ) echo "Please answer yes (y) or no (n).";;
 	esac
     done
-    
+else
+    mkdir ${BACKUP_DIR}
+    mkdir ${BACKUP_DIR}/database
+    mkdir ${BACKUP_DIR}/files
 fi
 
 
