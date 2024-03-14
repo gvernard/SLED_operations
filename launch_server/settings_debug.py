@@ -28,15 +28,8 @@ AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 
 STATIC_LOCATION = 'static'
 STATIC_URL = f'{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/{STATIC_LOCATION}/'
-#STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATICFILES_STORAGE = 'mysite.storage_backends.StaticStorage'
 
 DATABASE_FILE_LOCATION = 'files'
 MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/{AWS_STORAGE_BUCKET_NAME}/{DATABASE_FILE_LOCATION}/'
 DEFAULT_FILE_STORAGE = 'mysite.storage_backends.DatabaseFileStorage'
-
-#STATIC_URL = 'static/'
-#STATIC_ROOT = os.environ['DJANGO_STATIC_ROOT']
-    
-#MEDIA_URL = '/mediafiles/'
-#MEDIA_ROOT = os.environ['DJANGO_MEDIA_ROOT']
