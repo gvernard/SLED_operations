@@ -64,7 +64,7 @@ then
     echo "File $conf_file not found!"    
     exit
 fi
-rclone --config="${conf_file}" move ${BACKUP_DIR} sled_backup:${NAME}
+rclone --config="${conf_file}" move ${BACKUP_DIR} sled_backup:stronglens01-backup/${NAME}
 #rm -r ${BACKUP_DIR}
 
 
