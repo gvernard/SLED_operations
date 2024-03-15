@@ -51,7 +51,7 @@ fi
 
 ### Restore files
 S3_STORAGE_BUCKET_NAME=`grep -o 'Bucket.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
-#rclone --config="${conf_file}" copy sled_backup:${S3_BACKUP_BUCKET_NAME}/${NAME}/files sled_storage:${S3_STORAGE_BUCKET_NAME}/files
+rclone --config="${conf_file}" copy sled_backup:${S3_BACKUP_BUCKET_NAME}/${NAME}/files sled_storage:${S3_STORAGE_BUCKET_NAME}/files
 
 ### Restore database
 cd ${current_path}/../setup_database
