@@ -45,6 +45,7 @@ ${current_path}/empty_storage.sh
 if test $? != 0
 then
     echo "Stopping backup restoration."
+    exit
 fi
 
 
@@ -65,4 +66,4 @@ MPORT=$($AWK '/^port/{print $3}' $cnf_file)
 MDB=$($AWK '/^database/{print $3}' $cnf_file)
 MUSER=$($AWK '/^user/{print $3}' $cnf_file)
 MPASS=$($AWK '/^password/{print $3}' $cnf_file)
-rclone --config="${conf_file}" cat sled_backup:${S3_BACKUP_BUCKET_NAME}/${NAME}/database/strong_lenses_database.sql | $MYSQL -h $MHOST -P $MPORT -u $MUSER –p$MPASS $MDB
+rclone --config="${conf_file}" cat sled_backup:${S3_BACKUP_BUCKET_NAME}/${NAME}/database/strong_lenses_database.sql | $MYSQL -h $MHOST -P $MPORT -u $MUSER -p$MPASS $MDB
