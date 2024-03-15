@@ -23,9 +23,9 @@ while true; do
     read -p " Are you DEFINITELY sure you want to proceed (y/n)? " yn
     case $yn in
         [Yy]* ) rclone --config="${conf_file}" delete sled_storage:/stronglens01 --rmdirs; break;;
-        [Nn]* ) exit;;
+        [Nn]* ) exit 1;;
         * ) echo "Please answer yes (y) or no (n).";;
     esac
 done
-
+exit 0
 

@@ -55,7 +55,7 @@ $MYSQLDUMP --single-transaction -h $MHOST -P $MPORT -u $MUSER -p$MPASS $MDB > ${
 
 
 
-########## TRANSFER TO REMOTE STORAGE ##########
+########## TRANSFER TO REMOTE BACKUP ##########
 
 # Transfer backup file to remote backup storage
 conf_file=${secret_path}/rclone.conf
@@ -64,38 +64,9 @@ then
     echo "File $conf_file not found!"    
     exit
 fi
-rclone --config="${conf_file}" move ${BACKUP_DIR} sled_backup:stronglens01-backup/${NAME}
-#rm -r ${BACKUP_DIR}
 
+S3_BACKUP_BUCKET_NAME=`grep -o 'Bucket.*' ${secret_path}/s3_backup.txt | cut -f2- -d: | tr -d ' '`
+rclone --config="${conf_file}" move ${BACKUP_DIR} sled_backup:${S3_BACKUP_BUCKET_NAME}/${NAME}
 
-
-########## TRANSFER TO REMOTE STORAGE ##########
-
-#rclone --config="${conf_file}" sync sled_storage:static sled_backup:${NAME}/files
-
-
-
-
-
-exit
-
-
-########## BACKUP FILES ##########
-# Incremental backups using rsync
-set -o errexit
-set -o nounset
-set -o pipefail
-
-readonly BACKUP_PATH=${BACKUP_DIR}/${TARGET}
-readonly LATEST_LINK=${BACKUP_DIR}/latest
-
-mkdir -p ${BACKUP_DIR}/${TARGET}
-
-rsync -av --delete \
-  "${SOURCE_DIR}/" \
-  --link-dest "${LATEST_LINK}" \
-  --exclude="temporary" \
-  "${BACKUP_PATH}"
-
-rm -rf "${LATEST_LINK}"
-ln -s "${BACKUP_PATH}" "${LATEST_LINK}"
+S3_STORAGE_BUCKET_NAME=`grep -o 'Bucket.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
+rclone --config="${conf_file}" sync sled_storage:${S3_STORAGE_BUCKET_NAME}/files sled_backup:${S3_BACKUP_BUCKET_NAME}/${NAME}/files
