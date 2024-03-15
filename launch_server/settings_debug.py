@@ -5,7 +5,7 @@ SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 DEBUG = True
 
-EMAIL_HOST_PASSWORD = os.environ['DJANGO_EMAIL_PASSWORD']
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ALLOWED_HOSTS = ['127.0.0.1','127.0.1.1','localhost','sled.amnh.org','216.73.242.43']
 
