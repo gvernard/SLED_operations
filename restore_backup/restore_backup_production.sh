@@ -40,18 +40,24 @@ then
 fi
 
 
-### Empty remote storage
-${current_path}/empty_storage.sh
-if test $? != 0
-then
-    echo "Stopping backup restoration."
-    exit
-fi
 
 
-### Restore files
 S3_STORAGE_BUCKET_NAME=`grep -o 'Bucket.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
-rclone --config="${conf_file}" copy sled_backup:${S3_BACKUP_BUCKET_NAME}/${NAME}/files sled_storage:${S3_STORAGE_BUCKET_NAME}/files
+#### Empty remote storage
+#${current_path}/empty_storage.sh
+#if test $? != 0
+#then
+#    echo "Stopping backup restoration."
+#    exit
+#fi
+#
+#### Restore files
+#rclone --config="${conf_file}" copy sled_backup:${S3_BACKUP_BUCKET_NAME}/${NAME}/files sled_storage:${S3_STORAGE_BUCKET_NAME}/files
+rclone --config="${conf_file}" sync sled_backup:${S3_BACKUP_BUCKET_NAME}/${NAME}/files sled_storage:${S3_STORAGE_BUCKET_NAME}/files
+
+
+
+
 
 ### Restore database
 cd ${current_path}/../setup_database
