@@ -9,6 +9,7 @@ then
 fi
 mode=$1
 root_path=${2%/}
+mypython=/usr/local/bin/python3.12
 
 if [ $mode != "migrate" ]
 then
@@ -21,5 +22,6 @@ source ${root_path}/SLED_operations/launch_server/set_server.sh
 
 # Execute server
 cd ${root_path}/SLED_api
-sudo -E python3 manage.py makemigrations
-sudo -E python3 manage.py migrate
+sudo -E ${mypython} manage.py collectstatic --noinput
+sudo -E ${mypython} manage.py makemigrations
+sudo -E ${mypython} manage.py migrate

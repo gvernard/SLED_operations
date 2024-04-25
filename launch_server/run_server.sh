@@ -9,11 +9,11 @@ then
 fi
 mode=$1
 root_path=${2%/}
+mypython=/usr/local/bin/python3.12
 
 # Sets environment variables and copies the correct setting.py file
 source ${root_path}/SLED_operations/launch_server/set_server.sh
 
 # Execute server
 cd ${root_path}/SLED_api
-sudo -E python3 manage.py collectstatic --noinput
-sudo -E python3 manage.py runserver 216.73.242.43:8000
+sudo -E ${mypython} manage.py runserver 216.73.242.43:8000
