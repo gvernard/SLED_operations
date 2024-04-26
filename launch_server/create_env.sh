@@ -58,5 +58,5 @@ echo "os.environ['S3_STORAGE_BUCKET_NAME'] = '${S3_STORAGE_BUCKET_NAME}'" >> sle
 echo "export S3_ENDPOINT_URL=${S3_ENDPOINT_URL}" >> sled-envvars.env
 echo "os.environ['S3_ENDPOINT_URL'] = '${S3_ENDPOINT_URL}'" >> sled-envvars.py
 
-echo "export DJANGO_NO_LAST_LOGIN=${DJANGO_NO_LAST_LOGIN}" >> sled-envvars.env
-echo "os.environ['DJANGO_NO_LAST_LOGIN'] = ${DJANGO_NO_LAST_LOGIN}" >> sled-envvars.py
+#echo "export DJANGO_NO_LAST_LOGIN=${DJANGO_NO_LAST_LOGIN}" >> sled-envvars.env
+#echo "os.environ['DJANGO_NO_LAST_LOGIN'] = ${DJANGO_NO_LAST_LOGIN}" >> sled-envvars.py
