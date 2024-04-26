@@ -17,7 +17,7 @@ then
    S3_SECRET_ACCESS_KEY=`grep -o 'Secret.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
    S3_STORAGE_BUCKET_NAME=`grep -o 'Bucket.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
    S3_ENDPOINT_URL=`grep -o 'Endpoint.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
-   DJANGO_NO_LAST_LOGIN=true
+   DJANGO_NO_LAST_LOGIN='true'
 elif [[ "$mode" == "migrate" ]]
 then
     DJANGO_SLACK_API_TOKEN=`cat ${secret_path}/slack_api_token.txt`
@@ -28,7 +28,7 @@ then
     S3_SECRET_ACCESS_KEY=`grep -o 'Secret.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
     S3_STORAGE_BUCKET_NAME=`grep -o 'Bucket.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
     S3_ENDPOINT_URL=`grep -o 'Endpoint.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
-    DJANGO_NO_LAST_LOGIN=false
+    DJANGO_NO_LAST_LOGIN='false'
 else
     echo "Unknown mode"
     exit 0

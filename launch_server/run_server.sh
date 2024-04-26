@@ -5,6 +5,7 @@ site_path=/home/gvernardos/SLED
 mypython=/usr/local/bin/python3.12
 
 bash create_env.sh ${secret_path} migrate
+cp sled-envvars.py ${site_path}/SLED_api/mysite/
 source sled-envvars.env
 
 cd ${site_path}/SLED_api
