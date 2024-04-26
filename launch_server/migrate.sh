@@ -8,7 +8,7 @@ bash create_env.sh ${secret_path} migrate
 cp sled-envvars.py ${site_path}/SLED_api/mysite/
 source sled-envvars.env
 
-cd ${root_path}/SLED_api
+cd ${site_path}/SLED_api
 sudo -E ${mypython} manage.py collectstatic --noinput
 sudo -E ${mypython} manage.py makemigrations
 sudo -E ${mypython} manage.py migrate
