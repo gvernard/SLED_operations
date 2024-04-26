@@ -23,7 +23,7 @@ then
     DJANGO_SLACK_API_TOKEN=`cat ${secret_path}/slack_api_token.txt`
     DJANGO_EMAIL_PASSWORD=dummy
     DJANGO_DB_FILE=${secret_path}/sled_root.cnf
-    DJANGO_SECRET_KEY='django-insecure-3#$_(o_0g=w68gw@y5anq4$yb2$b!&1_@+bk%jse$*mboql#!t'
+    DJANGO_SECRET_KEY='django-insecure-3#$_o_0g=w68gw@y5anq4$yb2$b!&1_@+bk%jse$*mboql#!t'
     S3_ACCESS_KEY_ID=`grep -o 'Access.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
     S3_SECRET_ACCESS_KEY=`grep -o 'Secret.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
     S3_STORAGE_BUCKET_NAME=`grep -o 'Bucket.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
