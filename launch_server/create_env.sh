@@ -9,7 +9,7 @@ echo "import os" >> sled-envvars.py
 
 if [[ "$mode" == "production" ]]
 then
-    SLED_PROD="'true'"
+    SLED_PROD=active
     DJANGO_SLACK_API_TOKEN=`cat ${secret_path}/slack_api_token.txt`
     DJANGO_EMAIL_PASSWORD=`cat ${secret_path}/email_password.txt`
     DJANGO_DB_FILE=${secret_path}/sled_rw.cnf
@@ -21,7 +21,7 @@ then
     DJANGO_NO_LAST_LOGIN='true'
 elif [[ "$mode" == "migrate" ]]
 then
-    SLED_PROD='true'
+    SLED_PROD=active
     DJANGO_SLACK_API_TOKEN=`cat ${secret_path}/slack_api_token.txt`
     DJANGO_EMAIL_PASSWORD=dummy
     DJANGO_DB_FILE=${secret_path}/sled_root.cnf
