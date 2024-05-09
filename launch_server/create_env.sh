@@ -36,6 +36,9 @@ else
     exit 0
 fi
 
+echo "export SLED_PROD=${SLED_PROD}" >> sled-envvars.env
+echo "os.environ['SLED_PROD'] = '${SLED_PROD}'" >> sled-envvars.py
+
 echo "export DJANGO_SLACK_API_TOKEN=${DJANGO_SLACK_API_TOKEN}" >> sled-envvars.env
 echo "os.environ['DJANGO_SLACK_API_TOKEN'] = '${DJANGO_SLACK_API_TOKEN}'" >> sled-envvars.py
 
