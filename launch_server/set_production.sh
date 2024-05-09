@@ -1,6 +1,6 @@
 #!/bin/bash
 
-secret_path=/home/gvernardos/SLED/SLED_secrets
+secret_path=/etc/sled/SLED_secrets
 site_path=/var/www/sled/
 bash create_env.sh ${secret_path} production
 cp sled-envvars.env ${site_path}/envvars
