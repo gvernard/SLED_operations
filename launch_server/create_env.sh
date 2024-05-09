@@ -9,17 +9,19 @@ echo "import os" >> sled-envvars.py
 
 if [[ "$mode" == "production" ]]
 then
-   DJANGO_SLACK_API_TOKEN=`cat ${secret_path}/slack_api_token.txt`
-   DJANGO_EMAIL_PASSWORD=`cat ${secret_path}/email_password.txt`
-   DJANGO_DB_FILE=${secret_path}/sled_rw.cnf
-   DJANGO_SECRET_KEY=`cat ${secret_path}/secret_key.txt`
-   S3_ACCESS_KEY_ID=`grep -o 'Access.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
-   S3_SECRET_ACCESS_KEY=`grep -o 'Secret.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
-   S3_STORAGE_BUCKET_NAME=`grep -o 'Bucket.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
-   S3_ENDPOINT_URL=`grep -o 'Endpoint.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
-   DJANGO_NO_LAST_LOGIN='true'
+    SLED_PROD='true'
+    DJANGO_SLACK_API_TOKEN=`cat ${secret_path}/slack_api_token.txt`
+    DJANGO_EMAIL_PASSWORD=`cat ${secret_path}/email_password.txt`
+    DJANGO_DB_FILE=${secret_path}/sled_rw.cnf
+    DJANGO_SECRET_KEY=`cat ${secret_path}/secret_key.txt`
+    S3_ACCESS_KEY_ID=`grep -o 'Access.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
+    S3_SECRET_ACCESS_KEY=`grep -o 'Secret.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
+    S3_STORAGE_BUCKET_NAME=`grep -o 'Bucket.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
+    S3_ENDPOINT_URL=`grep -o 'Endpoint.*' ${secret_path}/s3_storage.txt | cut -f2- -d: | tr -d ' '`
+    DJANGO_NO_LAST_LOGIN='true'
 elif [[ "$mode" == "migrate" ]]
 then
+    SLED_PROD='true'
     DJANGO_SLACK_API_TOKEN=`cat ${secret_path}/slack_api_token.txt`
     DJANGO_EMAIL_PASSWORD=dummy
     DJANGO_DB_FILE=${secret_path}/sled_root.cnf
