@@ -9,4 +9,4 @@ cp sled-envvars.py ${site_path}/SLED_api/mysite/
 source sled-envvars.env
 
 cd ${site_path}/SLED_api
-sudo -E ${mypython} manage.py runserver 216.73.242.43:8000
+sudo -E ${mypython} manage.py runserver 216.73.242.43:8001

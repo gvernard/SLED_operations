@@ -2,7 +2,7 @@
 
 secret_path=/home/gvernardos/SLED/SLED_secrets
 site_path=/home/gvernardos/SLED
-mypython=/usr/local/bin/python3.12
+mypython=/usr/local/bin/python3.9
 
 bash create_env.sh ${secret_path} migrate
 cp sled-envvars.py ${site_path}/SLED_api/mysite/
